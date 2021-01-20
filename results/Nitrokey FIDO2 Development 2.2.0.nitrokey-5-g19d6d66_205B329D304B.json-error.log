@@ -1,0 +1,374 @@
+sz@stumpy ~/w/g/CTAP2-test-tool (docker-build) [SIGABRT]> sudo ./run_docker.sh
+Sending build context to Docker daemon  42.21MB
+Step 1/8 : FROM ubuntu:20.10
+ ---> 671495eee4d8
+Step 2/8 : RUN apt update && apt install -y curl gnupg
+ ---> Using cache
+ ---> 2c392a3bc72e
+Step 3/8 : RUN curl -fsSL https://bazel.build/bazel-release.pub.gpg | gpg --dearmor > bazel.gpg
+ ---> Using cache
+ ---> 52f512549b7d
+Step 4/8 : RUN mv bazel.gpg /etc/apt/trusted.gpg.d/
+ ---> Using cache
+ ---> 8733b7130f3f
+Step 5/8 : RUN echo "deb [arch=amd64] https://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list
+ ---> Using cache
+ ---> fd23e7d63667
+Step 6/8 : RUN apt update && apt install -y bazel libudev-dev autotools-dev autoconf automake libtool g++ git
+ ---> Using cache
+ ---> bc4fd1c91dfc
+Step 7/8 : RUN bazel
+ ---> Using cache
+ ---> 2689134b7675
+Step 8/8 : WORKDIR /app
+ ---> Using cache
+ ---> 8a11187cbed5
+Successfully built 8a11187cbed5
+Successfully tagged google-ctap2-test-tool-dev:latest
+Starting local Bazel server and connecting to it...
+INFO: Analyzed target //:fido2_conformance (42 packages loaded, 931 targets configured).
+INFO: Found 1 target...
+Target //:fido2_conformance up-to-date:
+  bazel-bin/fido2_conformance
+INFO: Elapsed time: 2.175s, Critical Path: 0.09s
+INFO: 4 processes: 3 internal, 1 linux-sandbox.
+INFO: Build completed successfully, 4 total actions
+INFO: Build completed successfully, 4 total actions
+Tested device path: /dev/hidraw6
+Tested device name: Nitrokey FIDO2 Development 2.2.0.nitrokey-5-g19d6d66
+This tool will irreversibly delete all credentials on your device. If one of your plugged security keys stores anything important, unplug it now before continuing.
+You have 10 seconds for the next touch after pressing enter.
+Please replug the device, then hit enter.
+
+Please touch your security key!
+Test successful: Tests if MakeCredential works with parameters of the wrong type.
+Expected error code `CTAP2_ERR_CBOR_UNEXPECTED_TYPE`, got `CTAP2_ERR_INVALID_CBOR`.
+Expected error code `CTAP2_ERR_CBOR_UNEXPECTED_TYPE`, got `CTAP2_ERR_MISSING_PARAMETER`.
+Test successful: Tests if MakeCredential works with missing parameters.
+Please touch your security key!
+Please touch your security key!
+Test successful: Tests bad parameters in RP entity parameter of MakeCredential.
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Test successful: Tests bad parameters in user parameter of MakeCredential.
+Please touch your security key!
+Test successful: Tests credential descriptors in the exclude list of MakeCredential.
+Please touch your security key!
+Test successful: Tests if unknown extensions are ignored in MakeCredential.
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Test successful: Tests if the exclude list is used correctly.
+Failed test: Tests entries in the credential parameters list. - Falsely rejected cred params list with 1 good and 1 bad element.
+Expected error code `CTAP2_ERR_UNSUPPORTED_ALGORITHM`, got `CTAP2_ERR_INVALID_CBOR`.
+A prompt was expected, but not performed. Sometimes it is just not recognized if performed too fast.
+The failing error code is `CTAP2_ERR_INVALID_CBOR`.
+Please touch your security key!
+Please touch your security key!
+Test successful: Tests if the resident key option is supported in MakeCredential.
+Test successful: Tests if user presence set to false is rejected in MakeCredential.
+Please touch your security key!
+Test successful: Tests if user verification set to false is accepted in MakeCredential.
+Please touch your security key!
+Test successful: Tests is user verification set to true is accepted in MakeCredential.
+You have 10 seconds for the next touch after pressing enter.
+Please replug the device, then hit enter.
+
+Please touch your security key!
+Failed test: Tests if unknown options are ignored in MakeCredential. - Falsely rejected unknown option.
+A prompt was expected, but not performed. Sometimes it is just not recognized if performed too fast.
+The failing error code is `CTAP2_ERR_LIMIT_EXCEEDED`.
+Please touch your security key!
+Test successful: Tests the response on an empty PIN auth without a PIN in MakeCredential.
+Test successful: Tests if the PIN protocol parameter is checked in MakeCredential.
+Test successful: Tests if a PIN auth is rejected without a PIN set in MakeCredential.
+Expected error code `CTAP2_ERR_PIN_NOT_SET`, got `CTAP2_ERR_PIN_AUTH_INVALID`.
+Please touch your security key!
+Test successful: Tests the response on an empty PIN auth with a PIN in MakeCredential.
+Expected error code `CTAP2_ERR_PIN_INVALID`, got `CTAP2_ERR_PIN_AUTH_INVALID`.
+Please touch your security key!
+Test successful: Tests if the PIN auth is correctly checked with a PIN set in MakeCredential.
+Please touch your security key!
+You have 10 seconds for the next touch after pressing enter.
+Please replug the device, then hit enter.
+
+Please touch your security key!
+Failed test: Tests if client PIN fails with missing parameters in MakeCredential. - Missing PIN protocol was not rejected when PIN is set.
+A prompt was sent unexpectedly.
+Expected error code `CTAP2_ERR_MISSING_PARAMETER`, got `CTAP2_OK`.
+Please touch your security key!
+Please touch your security key!
+Test successful: Tests if two credentials have the same ID.
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+You have 10 seconds for the next touch after pressing enter.
+Please replug the device, then hit enter.
+
+Please touch your security key!
+Test successful: Tests if storing lots of credentials is handled gracefully.
+===========================================================
+The next test checks if timeouts work properly. Please do
+not touch your security key until the test finishes. You
+should see a flashing LED on the device, please ignore it.
+===========================================================
+Test successful: Tests if user touch is required for MakeCredential.
+Expected error code `CTAP2_ERR_USER_ACTION_TIMEOUT`, got `CTAP2_ERR_ACTION_TIMEOUT`.
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Test successful: Tests if non-ASCII display name are accepted.
+Please touch your security key!
+Failed test: Tests if invalid UTF8 is caught in displayName. - UTF-8 correctness is not checked.
+A prompt was sent unexpectedly.
+Expected error code `CTAP2_ERR_INVALID_CBOR`, got `CTAP2_OK`.
+Please touch your security key!
+Test successful: Tests the HMAC secret extension with MakeCredential.
+Please touch your security key!
+Test successful: Tests if GetAssertion works with parameters of the wrong type.
+Expected error code `CTAP2_ERR_CBOR_UNEXPECTED_TYPE`, got `CTAP2_ERR_INVALID_CBOR`.
+Please touch your security key!
+Test successful: Tests if GetAssertion works with missing parameters.
+Please touch your security key!
+Please touch your security key!
+Test successful: Tests credential descriptors in the allow list of GetAssertion.
+Please touch your security key!
+Please touch your security key!
+Test successful: Tests if unknown extensions are ignored in GetAssertion.
+Please touch your security key!
+Please touch your security key!
+Failed test: Tests if the resident key option is rejected in GetAssertion. - The resident key option (false) was not rejected.
+A prompt was sent unexpectedly.
+Expected error code `CTAP2_ERR_INVALID_OPTION`, got `CTAP2_OK`.
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+Test successful: Tests if the user presence option is supported in GetAssertion.
+A prompt was sent unexpectedly.
+Please touch your security key!
+Please touch your security key!
+Test successful: Tests if user verification set to false is accepted in GetAssertion.
+Please touch your security key!
+Please touch your security key!
+Test successful: Tests is user verification set to true is accepted in GetAssertion.
+You have 10 seconds for the next touch after pressing enter.
+Please replug the device, then hit enter.
+
+Please touch your security key!
+Please touch your security key!
+Failed test: Tests if unknown options are ignored in GetAssertion. - Falsely rejected unknown option.
+A prompt was expected, but not performed. Sometimes it is just not recognized if performed too fast.
+The failing error code is `CTAP2_ERR_LIMIT_EXCEEDED`.
+Please touch your security key!
+Please touch your security key!
+Test successful: Tests if assertions with resident keys work.
+Please touch your security key!
+Please touch your security key!
+Test successful: Tests if assertions with non-resident keys work.
+Please touch your security key!
+Please touch your security key!
+Test successful: Tests the response on an empty PIN auth without a PIN in GetAssertion.
+Please touch your security key!
+Test successful: Tests if the PIN protocol parameter is checked in GetAssertion.
+Please touch your security key!
+Test successful: Tests if a PIN auth is rejected without a PIN set in GetAssertion.
+Expected error code `CTAP2_ERR_PIN_NOT_SET`, got `CTAP2_ERR_PIN_AUTH_INVALID`.
+Please touch your security key!
+Please touch your security key!
+Test successful: Tests the response on an empty PIN auth with a PIN in GetAssertion.
+Expected error code `CTAP2_ERR_PIN_INVALID`, got `CTAP2_ERR_PIN_AUTH_INVALID`.
+Please touch your security key!
+Please touch your security key!
+Test successful: Tests if the PIN auth is correctly checked with a PIN set in GetAssertion.
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+You have 10 seconds for the next touch after pressing enter.
+Please replug the device, then hit enter.
+
+Please touch your security key!
+Failed test: Tests if client PIN fails with missing parameters in GetAssertion. - Missing PIN protocol was not rejected when PIN is set.
+A prompt was sent unexpectedly.
+Expected error code `CTAP2_ERR_MISSING_PARAMETER`, got `CTAP2_OK`.
+Please touch your security key!
+===========================================================
+The next test checks if timeouts work properly. Please do
+not touch your security key until the test finishes. You
+should see a flashing LED on the device, please ignore it.
+===========================================================
+Failed test: Tests if user touch is required for GetAssertion. - A credential was asserted without user presence.
+Expected error code `CTAP2_ERR_USER_ACTION_TIMEOUT`, got `CTAP2_OK`.
+Please touch your security key!
+Please touch your security key!
+Failed test: Tests if empty user IDs are omitted in the response. - The response includes user with an empty ID. This behaviour has known interoperability hurdles.
+Test successful: Tests if GetPinRetries works with parameters of the wrong type.
+Expected error code `CTAP2_ERR_CBOR_UNEXPECTED_TYPE`, got `CTAP2_ERR_INVALID_CBOR`.
+Test successful: Tests if GetPinRetries works with missing parameters.
+Expected error code `CTAP2_ERR_MISSING_PARAMETER`, got `CTAP1_ERR_OTHER`.
+Test successful: Tests if GetKeyAgreement works with parameters of the wrong type.
+Expected error code `CTAP2_ERR_CBOR_UNEXPECTED_TYPE`, got `CTAP2_ERR_INVALID_CBOR`.
+Test successful: Tests if GetKeyAgreement works with missing parameters.
+Expected error code `CTAP2_ERR_MISSING_PARAMETER`, got `CTAP1_ERR_OTHER`.
+Test successful: Tests if SetPin works with parameters of the wrong type.
+Expected error code `CTAP2_ERR_CBOR_UNEXPECTED_TYPE`, got `CTAP2_ERR_INVALID_CBOR`.
+Expected error code `CTAP2_ERR_CBOR_UNEXPECTED_TYPE`, got `CTAP1_ERR_INVALID_LENGTH`.
+Test successful: Tests if SetPin works with missing parameters.
+Expected error code `CTAP2_ERR_MISSING_PARAMETER`, got `CTAP1_ERR_INVALID_LENGTH`.
+Expected error code `CTAP2_ERR_MISSING_PARAMETER`, got `CTAP2_ERR_PIN_POLICY_VIOLATION`.
+Test successful: Tests if ChangePin works with parameters of the wrong type.
+Expected error code `CTAP2_ERR_CBOR_UNEXPECTED_TYPE`, got `CTAP2_ERR_INVALID_CBOR`.
+Expected error code `CTAP2_ERR_CBOR_UNEXPECTED_TYPE`, got `CTAP1_ERR_INVALID_LENGTH`.
+Test successful: Tests if ChangePin works with missing parameters.
+Expected error code `CTAP2_ERR_MISSING_PARAMETER`, got `CTAP1_ERR_INVALID_LENGTH`.
+Expected error code `CTAP2_ERR_MISSING_PARAMETER`, got `CTAP2_ERR_PIN_POLICY_VIOLATION`.
+Test successful: Tests if GetPinToken works with parameters of the wrong type.
+Expected error code `CTAP2_ERR_CBOR_UNEXPECTED_TYPE`, got `CTAP2_ERR_INVALID_CBOR`.
+Expected error code `CTAP2_ERR_CBOR_UNEXPECTED_TYPE`, got `CTAP1_ERR_INVALID_LENGTH`.
+Test successful: Tests if GetPinToken works with missing parameters.
+Expected error code `CTAP2_ERR_MISSING_PARAMETER`, got `CTAP1_ERR_INVALID_LENGTH`.
+Expected error code `CTAP2_ERR_MISSING_PARAMETER`, got `CTAP2_ERR_PIN_NOT_SET`.
+Test successful: Tests if GetPinUvAuthTokenUsingUvWithPermissions works with parameters of the wrong type.
+Expected error code `CTAP2_ERR_CBOR_UNEXPECTED_TYPE`, got `CTAP2_ERR_INVALID_CBOR`.
+Expected error code `CTAP2_ERR_CBOR_UNEXPECTED_TYPE`, got `CTAP1_ERR_OTHER`.
+Test successful: Tests if GetPinUvAuthTokenUsingUvWithPermissions works with missing parameters.
+Expected error code `CTAP2_ERR_MISSING_PARAMETER`, got `CTAP1_ERR_OTHER`.
+Test successful: Tests if GetUVRetries works with parameters of the wrong type.
+Expected error code `CTAP2_ERR_CBOR_UNEXPECTED_TYPE`, got `CTAP2_ERR_INVALID_CBOR`.
+Test successful: Tests if GetUVRetries works with missing parameters.
+Expected error code `CTAP2_ERR_MISSING_PARAMETER`, got `CTAP1_ERR_OTHER`.
+Please touch your security key!
+Please touch your security key!
+Test successful: Tests if PIN requirement are enforced in SetPin.
+Test successful: Tests if PIN requirement are enforced in ChangePin.
+You have 10 seconds for the next touch after pressing enter.
+Please replug the device, then hit enter.
+
+Please touch your security key!
+Please touch your security key!
+You have 10 seconds for the next touch after pressing enter.
+Please replug the device, then hit enter.
+
+Please touch your security key!
+Failed test: Tests if new PIN requirement are enforced in SetPin. - Accepted a PIN with padding of length 128.
+Expected error code `CTAP2_ERR_PIN_POLICY_VIOLATION`, got `CTAP2_OK`.
+You have 10 seconds for the next touch after pressing enter.
+Please replug the device, then hit enter.
+
+Please touch your security key!
+Failed test: Tests if new PIN requirement are enforced in ChangePin. - Accepted a PIN with padding of length 128.
+Expected error code `CTAP2_ERR_PIN_POLICY_VIOLATION`, got `CTAP2_OK`.
+Test successful: Tests if key material is regenerated correctly.
+Test successful: Tests if PIN retries are decreased and reset.
+Please replug the device, then hit enter.
+
+Test successful: Tests if PIN auth attempts are blocked correctly.
+Please replug the device, then hit enter.
+
+Please replug the device, then hit enter.
+
+You have 10 seconds for the next touch after pressing enter.
+Please replug the device, then hit enter.
+
+Please touch your security key!
+Test successful: Tests if PINs are blocked correctly.
+Expected error code `CTAP2_ERR_PIN_BLOCKED`, got `CTAP2_ERR_PIN_INVALID`.
+Test successful: Tests the return values of GetInfo.
+Please touch your security key!
+Please touch your security key!
+Please replug the device, then hit enter.
+
+Please touch your security key!
+Please touch your security key!
+Test successful: Tests whether credentials persist after replug.
+Please replug the device, then hit enter.
+
+Test successful: Tests whether PIN retries persist after replug.
+Please replug the device, then hit enter.
+
+Test successful: Tests whether the PIN auth token regenerates after replug.
+You have 10 seconds for the next touch after pressing enter.
+Please replug the device, then hit enter.
+
+Please touch your security key!
+Test successful: Tests if the Wink response matches the capability bit.
+Please touch your security key!
+Please touch your security key!
+Please touch your security key!
+You have 10 seconds for the next touch after pressing enter.
+Please replug the device, then hit enter.
+
+Please touch your security key!
+
+Test successful: Tests if Reset actually deletes credentials.
+You have 10 seconds for the next touch after pressing enter.
+Please replug the device, then hit enter.
+A prompt was expected, but not performed. Sometimes it is just not recognized if performed too fast.
+The failing error code is `CTAP2_ERR_NOT_ALLOWED`.
+F0120 12:04:16.254300     7 device_tracker.cc:168] Check failed: condition Failed critical condition: Reset
+*** Check failure stack trace: ***
+    @     0x55c9b945e64e  google::LogMessage::Fail()
+    @     0x55c9b945e589  google::LogMessage::SendToLog()
+    @     0x55c9b945deb0  google::LogMessage::Flush()
+    @     0x55c9b9460fc4  google::LogMessageFatal::~LogMessageFatal()
+    @     0x55c9b9366f3d  fido2_tests::DeviceTracker::AssertCondition()
+    @     0x55c9b9367133  fido2_tests::DeviceTracker::AssertResponse()
+    @     0x55c9b9346168  fido2_tests::CommandState::Reset()
+    @     0x55c9b933ad04  fido2_tests::DeletePinTest::Execute()
+    @     0x55c9b92f4c20  fido2_tests::runners::RunTests()
+    @     0x55c9b92e6966  main
+    @     0x7f2b00df1cb2  __libc_start_main
+    @     0x55c9b92e646e  _start
+    @              (nil)  (unknown)
+/app/run.sh: line 19:     7 Aborted                 (core dumped) bazel run //:fido2_conformance -- --token_path="$path"
+sz@stumpy ~/w/g/CTAP2-test-tool (docker-build) [SIGABRT]>
+
