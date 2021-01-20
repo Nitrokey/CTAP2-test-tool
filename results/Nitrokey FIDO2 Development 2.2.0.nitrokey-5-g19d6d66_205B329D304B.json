@@ -7,20 +7,20 @@
     ],
     "msg": true,
     "options": [
-      "up",
       "credentialMgmtPreview",
       "clientPin",
+      "up",
       "rk"
     ],
     "signature_counter": "All counters were strictly increasing, but not necessarily incremented by 1.",
     "versions": [
-      "U2F_V2",
       "FIDO_2_0",
+      "U2F_V2",
       "FIDO_2_1_PRE"
     ],
     "wink": true
   },
-  "commit": "88aee0a0432a5a273808652c970e7e324ca68ed0",
+  "commit": "190804cc5e2f12a4e74b3f6b342b6d0a6d526162",
   "date": "2021-01-20",
   "device_under_test": {
     "aaguid": "c39efba6fcf44c3e828bfc4a6115a0ff",
@@ -31,7 +31,7 @@
     "url": null,
     "vendor_id": "0x20a0"
   },
-  "passed_test_count": 61,
+  "passed_test_count": 62,
   "tests": [
     {
       "description": "Tests if MakeCredential works with parameters of the wrong type.",
@@ -594,8 +594,8 @@
       ],
       "result": "pass",
       "tags": [
-        "FIDO 2.1",
-        "Client PIN"
+        "Client PIN",
+        "FIDO 2.1"
       ]
     },
     {
@@ -607,8 +607,8 @@
       ],
       "result": "pass",
       "tags": [
-        "FIDO 2.1",
-        "Client PIN"
+        "Client PIN",
+        "FIDO 2.1"
       ]
     },
     {
@@ -620,8 +620,8 @@
       ],
       "result": "pass",
       "tags": [
-        "FIDO 2.1",
-        "Client PIN"
+        "Client PIN",
+        "FIDO 2.1"
       ]
     },
     {
@@ -705,10 +705,13 @@
     },
     {
       "description": "Tests if PIN auth attempts are blocked correctly.",
-      "error_message": null,
+      "error_message": "Getting the auth token failed after replugging an auth block.",
       "id": "client_pin_auth_block_pin_retries",
-      "observations": [],
-      "result": "pass",
+      "observations": [
+        "GetAuthToken failed.",
+        "The failing error code is `CTAP2_ERR_PIN_AUTH_BLOCKED`."
+      ],
+      "result": "fail",
       "tags": [
         "Client PIN"
       ]
@@ -778,8 +781,30 @@
       "observations": [],
       "result": "pass",
       "tags": []
+    },
+    {
+      "description": "Tests if Reset actually deletes the PIN.",
+      "error_message": null,
+      "id": "delete_pin",
+      "observations": [],
+      "result": "pass",
+      "tags": [
+        "Client PIN"
+      ]
+    },
+    {
+      "description": "Tests if Reset requirements are enforced.",
+      "error_message": null,
+      "id": "reset_physical_presence",
+      "observations": [
+        "Expected error code `CTAP2_ERR_USER_ACTION_TIMEOUT`, got `CTAP2_ERR_ACTION_TIMEOUT`."
+      ],
+      "result": "pass",
+      "tags": [
+        "FIDO 2.1"
+      ]
     }
   ],
-  "total_test_count": 72,
+  "total_test_count": 74,
   "transport_used": "HID"
 }

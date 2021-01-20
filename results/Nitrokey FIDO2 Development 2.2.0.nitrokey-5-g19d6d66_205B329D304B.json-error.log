@@ -1,5 +1,6 @@
-sz@stumpy ~/w/g/CTAP2-test-tool (docker-build) [SIGABRT]> sudo ./run_docker.sh
-Sending build context to Docker daemon  42.21MB
+sz@stumpy ~/w/g/CTAP2-test-tool (docker-build)> sudo ./run_docker.sh
+[sudo] password for sz:
+Sending build context to Docker daemon  42.27MB
 Step 1/8 : FROM ubuntu:20.10
  ---> 671495eee4d8
 Step 2/8 : RUN apt update && apt install -y curl gnupg
@@ -30,10 +31,10 @@ INFO: Analyzed target //:fido2_conformance (42 packages loaded, 931 targets conf
 INFO: Found 1 target...
 Target //:fido2_conformance up-to-date:
   bazel-bin/fido2_conformance
-INFO: Elapsed time: 2.175s, Critical Path: 0.09s
-INFO: 4 processes: 3 internal, 1 linux-sandbox.
-INFO: Build completed successfully, 4 total actions
-INFO: Build completed successfully, 4 total actions
+INFO: Elapsed time: 2.206s, Critical Path: 0.16s
+INFO: 5 processes: 3 internal, 2 linux-sandbox.
+INFO: Build completed successfully, 5 total actions
+INFO: Build completed successfully, 5 total actions
 Tested device path: /dev/hidraw6
 Tested device name: Nitrokey FIDO2 Development 2.2.0.nitrokey-5-g19d6d66
 This tool will irreversibly delete all credentials on your device. If one of your plugged security keys stores anything important, unplug it now before continuing.
@@ -311,7 +312,13 @@ Test successful: Tests if key material is regenerated correctly.
 Test successful: Tests if PIN retries are decreased and reset.
 Please replug the device, then hit enter.
 
-Test successful: Tests if PIN auth attempts are blocked correctly.
+You have 10 seconds for the next touch after pressing enter.
+Please replug the device, then hit enter.
+
+Please touch your security key!
+Failed test: Tests if PIN auth attempts are blocked correctly. - Getting the auth token failed after replugging an auth block.
+GetAuthToken failed.
+The failing error code is `CTAP2_ERR_PIN_AUTH_BLOCKED`.
 Please replug the device, then hit enter.
 
 Please replug the device, then hit enter.
@@ -348,27 +355,63 @@ You have 10 seconds for the next touch after pressing enter.
 Please replug the device, then hit enter.
 
 Please touch your security key!
-
 Test successful: Tests if Reset actually deletes credentials.
 You have 10 seconds for the next touch after pressing enter.
 Please replug the device, then hit enter.
+
+Please touch your security key!
+Please touch your security key!
+Test successful: Tests if Reset actually deletes the PIN.
+You have 10 seconds for the next touch after pressing enter.
+Please replug the device, then hit enter.
+
+Please touch your security key!
+===========================================================
+The next test checks if timeouts work properly. Please do
+not touch your security key until the test finishes. You
+should see a flashing LED on the device, please ignore it.
+===========================================================
+The next touch prompt is valid again.
+Test successful: Tests if Reset requirements are enforced.
+Expected error code `CTAP2_ERR_USER_ACTION_TIMEOUT`, got `CTAP2_ERR_ACTION_TIMEOUT`.
+You have 10 seconds for the next touch after pressing enter.
+Please replug the device, then hit enter.
+
+Please touch your security key!
+
+RESULTS
+Failed test: Tests entries in the credential parameters list. - Falsely rejected cred params list with 1 good and 1 bad element.
+Expected error code `CTAP2_ERR_UNSUPPORTED_ALGORITHM`, got `CTAP2_ERR_INVALID_CBOR`.
 A prompt was expected, but not performed. Sometimes it is just not recognized if performed too fast.
-The failing error code is `CTAP2_ERR_NOT_ALLOWED`.
-F0120 12:04:16.254300     7 device_tracker.cc:168] Check failed: condition Failed critical condition: Reset
-*** Check failure stack trace: ***
-    @     0x55c9b945e64e  google::LogMessage::Fail()
-    @     0x55c9b945e589  google::LogMessage::SendToLog()
-    @     0x55c9b945deb0  google::LogMessage::Flush()
-    @     0x55c9b9460fc4  google::LogMessageFatal::~LogMessageFatal()
-    @     0x55c9b9366f3d  fido2_tests::DeviceTracker::AssertCondition()
-    @     0x55c9b9367133  fido2_tests::DeviceTracker::AssertResponse()
-    @     0x55c9b9346168  fido2_tests::CommandState::Reset()
-    @     0x55c9b933ad04  fido2_tests::DeletePinTest::Execute()
-    @     0x55c9b92f4c20  fido2_tests::runners::RunTests()
-    @     0x55c9b92e6966  main
-    @     0x7f2b00df1cb2  __libc_start_main
-    @     0x55c9b92e646e  _start
-    @              (nil)  (unknown)
-/app/run.sh: line 19:     7 Aborted                 (core dumped) bazel run //:fido2_conformance -- --token_path="$path"
-sz@stumpy ~/w/g/CTAP2-test-tool (docker-build) [SIGABRT]>
+The failing error code is `CTAP2_ERR_INVALID_CBOR`.
+Failed test: Tests if unknown options are ignored in MakeCredential. - Falsely rejected unknown option.
+A prompt was expected, but not performed. Sometimes it is just not recognized if performed too fast.
+The failing error code is `CTAP2_ERR_LIMIT_EXCEEDED`.
+Failed test: Tests if client PIN fails with missing parameters in MakeCredential. - Missing PIN protocol was not rejected when PIN is set.
+A prompt was sent unexpectedly.
+Expected error code `CTAP2_ERR_MISSING_PARAMETER`, got `CTAP2_OK`.
+Failed test: Tests if invalid UTF8 is caught in displayName. - UTF-8 correctness is not checked.
+A prompt was sent unexpectedly.
+Expected error code `CTAP2_ERR_INVALID_CBOR`, got `CTAP2_OK`.
+Failed test: Tests if the resident key option is rejected in GetAssertion. - The resident key option (false) was not rejected.
+A prompt was sent unexpectedly.
+Expected error code `CTAP2_ERR_INVALID_OPTION`, got `CTAP2_OK`.
+Failed test: Tests if unknown options are ignored in GetAssertion. - Falsely rejected unknown option.
+A prompt was expected, but not performed. Sometimes it is just not recognized if performed too fast.
+The failing error code is `CTAP2_ERR_LIMIT_EXCEEDED`.
+Failed test: Tests if client PIN fails with missing parameters in GetAssertion. - Missing PIN protocol was not rejected when PIN is set.
+A prompt was sent unexpectedly.
+Expected error code `CTAP2_ERR_MISSING_PARAMETER`, got `CTAP2_OK`.
+Failed test: Tests if user touch is required for GetAssertion. - A credential was asserted without user presence.
+Expected error code `CTAP2_ERR_USER_ACTION_TIMEOUT`, got `CTAP2_OK`.
+Failed test: Tests if empty user IDs are omitted in the response. - The response includes user with an empty ID. This behaviour has known interoperability hurdles.
+Failed test: Tests if new PIN requirement are enforced in SetPin. - Accepted a PIN with padding of length 128.
+Expected error code `CTAP2_ERR_PIN_POLICY_VIOLATION`, got `CTAP2_OK`.
+Failed test: Tests if new PIN requirement are enforced in ChangePin. - Accepted a PIN with padding of length 128.
+Expected error code `CTAP2_ERR_PIN_POLICY_VIOLATION`, got `CTAP2_OK`.
+Failed test: Tests if PIN auth attempts are blocked correctly. - Getting the auth token failed after replugging an auth block.
+GetAuthToken failed.
+The failing error code is `CTAP2_ERR_PIN_AUTH_BLOCKED`.
+Passed 62 out of 74 tests.
+sz@stumpy ~/w/g/CTAP2-test-tool (docker-build)>
 
